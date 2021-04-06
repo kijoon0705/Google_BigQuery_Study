@@ -1,0 +1,7 @@
+#SELECT로 행 검색하기
+
+SELECT
+    gender, tripduration
+FROM 
+    `bigquery-public-data`.new_york_citibike.citibike_trips
+LIMIT 5
