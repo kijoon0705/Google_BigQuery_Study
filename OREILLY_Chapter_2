@@ -1,7 +1,43 @@
-#SELECT로 행 검색하기
+-- SELECT로 행 검색하기
 
 SELECT
     gender, tripduration
 FROM 
     `bigquery-public-data`.new_york_citibike.citibike_trips
 LIMIT 5
+
+
+-- AS 별칠 붙이기
+
+SELECT
+    gender, tripduration AS rental_duration
+FROM 
+    `bigquery-public-data`.new_york_citibike.citibike_trips
+LIMIT 5
+
+#컬럼 별칭은 데이터를 변환할때 유용하다 아래의 쿼리를 봐보자
+
+-- 데이터 변환시 별칭 사용하기 
+
+SELECT
+    gender, tripduration/60 AS rental_duration
+FROM 
+    `bigquery-public-data`.new_york_citibike.citibike_trips
+LIMIT 5
+
+# SELECT 절에서 바로 데이터 변환이 되어지는데 이때 별칭을 사용하지 않으면 컬럼명이 자동으로 생성되어진다.
+# 그러니 가독성을 위해 꼭! AS를 사용해주자
+
+-- WHERE로 필터링하기(pg 59)
+# 대여한 사람이 여성이고 대여 기간이 5분에서 10분 사이인 대여 건
+SELECT
+    gender, tripduration
+FROM 
+    `bigquery-public-data`.new_york_citibike.citibike_trips
+WHERE tripduration >= 300 AND tripduration < 600 AND gender = 'female'
+LIMIT 5
+
+-- 
+
+
+
