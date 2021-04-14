@@ -37,7 +37,25 @@ FROM
 WHERE tripduration >= 300 AND tripduration < 600 AND gender = 'female'
 LIMIT 5
 
--- 
+# 집계 pg 63
+# WHERE 절로 집계시 남녀 중 하나만 집계가 가능하다. 즉, 남녀를 구하기 위해선 쿼리를 두번 날려야 하기 때문에 비용이 두배로 든다. 
+# 이럴때는 GROUP BY 절로 집계를 하여 쿼리르 날리면 한번에 구하 수 있다. 
+# GROUP BY로 집계하기, 남녀 사용자의 평균 대여 시간을 찾는다
+
+SELECT
+    gender, AVG(tripduration/60) AS avg_trip_duration
+FROM 
+    `bigquery-public-data`.new_york_citibike.citibike_trips
+WHERE
+    tripduration is not NULL
+GROUP BY 
+    gender
+ORDER BY 
+    avg_trip_duration
+
+
+#
+
 
 
 
